@@ -1,0 +1,62 @@
+body {
+	background:#999;
+	font-family:arial;
+}
+
+h1, h2, p, li { 
+	color:#555;
+}
+
+a{
+	color:green;
+}
+
+p {
+	color:white;
+}
+
+.text-center {
+	//background-color:white;
+	margin-top:60px;
+}
+
+.text-right{
+	padding:15px;
+
+}
+
+#footer{
+	color:yellow;
+}
+
+#title{
+	padding-top: 50px;
+}
+
+#login{
+	bottom:40px;
+	position:relative;
+	right:15px;
+}
+
+
+#loginTitle{
+	color:white;
+}
+
+#textInputs{
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
