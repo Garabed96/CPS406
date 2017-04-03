@@ -1,5 +1,5 @@
 body {
-	background:#999;
+	background:DarkTurquoise;
 	font-family:arial;
 }
 
@@ -27,6 +27,10 @@ p {
 
 #footer{
 	color:yellow;
+	padding:50px;
+	padding-bottom: 20px
+	margin-top: 50px
+	border-radius: 10px;
 }
 
 #title{
@@ -39,6 +43,15 @@ p {
 	right:15px;
 }
 
+#register{
+
+	top:50px;
+	padding:10px;
+	position: relative;
+	left:50%;
+
+}
+
 
 #loginTitle{
 	color:white;
@@ -49,14 +62,25 @@ p {
 
 }
 
+#regPlease{
+
+	padding: 10px;
+	height: 13px;
+
+}
+
+input{
+	
+	*overflow: hidden;
+}
 
 
-
-
-
-
-
-
-
+label{
+	padding-left: 20px;
+display:inline-block;
+width:200px;
+margin-right:30px;
+text-align:right;
+}
 
 

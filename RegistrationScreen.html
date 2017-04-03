@@ -7,23 +7,41 @@
 	<head>
 	<link href="main.css" rel="stylesheet" 
 		type="text/css" /></head>
-		<title>Page #4</title>
+		<title>Registration</title>
 	<body>
-		<h1 class="text-center">The Website</h1>
-		<ul>
-		<li><a href="index.html">Home Screen</a></li>
-		<li>
-			<a href="LoginScreen.html">Login Screen</a>
-		</li>
-		<li><a href="PortalScreen.html">Portal Screen</a></li>
-		<li>
-			<a href="ReportingScreen.html">Reporting Screen</a>
-		</li>
-		</ul>
-		<h2 class="text-center">Registration</h2>
-		<p class="text-center"> This is my Registration Screen <p>
+		<h1 class="text-center">Registration</h1>
+		<p id="regPlease"> Please enter the information 
+		bellow:<p>
+		<fieldset>
+  		  <label for:="txtFirstName">First Name:</label>
+  		  	<input type="text" name="txtFirstName" size="25">
+  		  	<label for:="txtLastName">Last Name:</label>
+  		  	<input type="text" name="txtLastName" size="25">
+  		  	<label for:="txtAddress">Address:</label>
+  		  	<input type="text" name="txtAddress" size="25"> 
+  		  	<label for:="txtPhoneNumber">Phone Number:</label>
+  		  	<input type="text" name="txtPhoneNumber" size="25">
+  		  	<label for:="txtEmail">E-mail Address:</label>
+  		  	<input type="text" name="txtEmail" size="25">
+  		  	<label for:="txtUsername">Username:</label>
+  		  	<input type="text" name="txtUsername" size="25">
+  		  	<label for:="txtPassword">Password:</label>
+  		  	<input type="text" name="txtPassword" size="25">
+		</fieldset>
+
+		<div class="text-center">
+		 <p>Already have an account? <a href="LoginScreen.html">
+			Sign In</a>
+		</div>
+		
+		
+		<div>
+			<button id="register" class="btn">Register</buton> </a>
+				</div>
+
 		<footer class="text-right">
 						<a id="footer"> FAQ </a></footer>
+
 
 	</body>
 </html>
