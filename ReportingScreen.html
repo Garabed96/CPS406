@@ -5,11 +5,13 @@
 
 </style>
 	<head>
+		<div> <a href="LoginScreen.html">
+			<button id="logout" class="btn-toolbar pull-right">Logout</buton> </a>
+		</div>
 	<link href="main.css" rel="stylesheet" 
 		type="text/css" /></head>
 		<title>ReportingScreen</title>
 	<body>
-		<h1 class="text-center">The Website</h1>
 		<ul>
 		<li><a href="index.html">Home Screen</a></li>
 		<li>
@@ -18,8 +20,57 @@
 		<li><a href="PortalScreen.html">Portal Screen</a></li>
 		<li><a href="RegistrationScreen.html">Registration Screen</a></li>
 		</ul>
-		<h2 class="text-center reg">Report</h2>
-		<p class="text-center"> This is my reporting screen </p>
+		
+		<fieldset>
+  		  <label for:="txtAddress">Address:</label>
+  		  	<input type="text" name="txtAddress" size="50">
+  		  </fieldset>
+
+  		  <h3> 
+  		  	<font size="4">Problem on the site:</font>
+  		  </h3>
+
+  		  <form>
+  		  	<div> 
+  		  		<label><input type="checkbox" />Utility Failures</label>
+
+  		  		<label><input type="checkbox" />  		  		Tree Collapse </label>
+  		  		<label><input type="checkbox" />
+  		  		Potholes</label>
+
+  		  		<label><input type="checkbox" />
+  		  		Flooded Streets</label>
+
+  		  		<label><input type="checkbox" />
+  		  		Flooded Streets</label>
+
+  		  		<label><input type="checkbox" />
+  		  		City Property Vandalism</label>
+
+  		  		<label><input type="checkbox" />
+  		  		Mould and Spore Growth</label>
+
+  		  		<label><input type="checkbox" />
+  		  		Eroded Streets</label>
+
+
+  		  		<label><input type="checkbox" />
+  		  		Garbage or any other Road Blocking Objects  </label>
+			</div>
+			</form>
+
+  		  	<div class="text-center">
+  		  		<a>
+  		  		<button id="firstButton" class="btn">
+         			Report 
+       			</button> </a>
+       			
+       			<a>
+       			<button id="firstButton" class="btn">
+         			Cancel
+       			</button> </a>
+  		  	</div>
+
 	</body>
 
 			<footer class="text-right">
