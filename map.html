@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1> Map of Toronto</h1>
+
+<div id="map" style="width:700px;height:700px"> Toronto Map will go here. </div> 
+
+<script>
+function myMap() {
+	
+	var mapOptions ={
+		center: new google.maps.LatLng(43.65, -79.38),
+		zoom: 14,
+		mapTypeId: google.maps.MapTypeId.ROADMAP	
+	
+	}
+	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	var flagadd = {lat: 43.65, lng: -79.38 };
+	var flag = new google.maps.Mrker({
+		position: flagadd,
+		map: map
+		});
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+
+</body>
+</html>
