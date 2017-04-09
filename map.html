@@ -17,14 +17,23 @@ function myMap() {
 	}
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	var flagadd = {lat: 43.65, lng: -79.38 };
-	var flag = new google.maps.Mrker({
+	var flag = new google.maps.Marker({
 		position: flagadd,
 		map: map
 		});
+    google.maps.event.addListener(flag,'click',function() {
+    var report = new google.maps.InfoWindow({
+      content:"Status: In progress </br> Type: Plumbing </br> Description: Stuff </br> Priority: 1 </br>"
+				
+	 
+    });
+  report.open(map,flag);
+  });		
+		
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap"></script>
 
 </body>
 </html>
