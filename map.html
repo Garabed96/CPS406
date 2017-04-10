@@ -3,37 +3,83 @@
 <body>
 
 <h1> Map of Toronto</h1>
+<div>
+	<label>Intersection 1</label><input id='I1'>
+	<label>Intersection 2</label><input id='I2'>
+	<button id = 'mark' type = 'button' onClick='markIt()'>mark</button>
+</div>
 
-<div id="map" style="width:700px;height:700px"> Toronto Map will go here. </div> 
+<div id="map" style="width:1000px;height:500px;">Toronto Map will go here.</div> 
 
 <script>
-function myMap() {
+var getJSON = function(url)
+{
+	return new Promise(function(resolve, reject) 
+	{
+		var xhr = new XMLHttpRequest();
+		xhr.open('get', url, true);
+		xhr.responseType = 'json';
+		xhr.onload = function() 
+		{
+			var status = xhr.status;
+			if (status == 200) 
+			{
+				resolve(xhr.response);
+			}else{
+					reject(status);
+				}
+		};
+		xhr.send();
+	  });
+};
+
+function markIt()
+{
+	var I1=document.getElementById("I1").value;
+	var I2=document.getElementById("I2").value;
+	url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+I1+'+and+'+I2+'+toronto'
+	
+//Loads JSON-encoded data from the server using a GET HTTP request
+	getJSON(url).then(function(response)
+	{	//console.log(response);
+		myMap(response.results[0].geometry.location.lat, response.results[0].geometry.location.lng)
+	});
+	
+}
+
+function myMap(lat, lng) 
+{	
+	if(lat && lng)
+	{
+		var toronto = new google.maps.LatLng(lat, lng);
+	}
+	else{
+			var toronto = new google.maps.LatLng(43.6115160, -79.5415350);	
+		}
 	
 	var mapOptions ={
-		center: new google.maps.LatLng(43.65, -79.38),
+		center: toronto,
 		zoom: 14,
 		mapTypeId: google.maps.MapTypeId.ROADMAP	
-	
-	}
+		}
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-	var flagadd = {lat: 43.65, lng: -79.38 };
-	var flag = new google.maps.Marker({
-		position: flagadd,
-		map: map
+	var infowindow = new google.maps.InfoWindow({
+          content: '<h1>Tashi house<h1>'
 		});
-    google.maps.event.addListener(flag,'click',function() {
-    var report = new google.maps.InfoWindow({
-      content:"Status: In progress </br> Type: Plumbing </br> Description: Stuff </br> Priority: 1 </br>"
-				
-	 
-    });
-  report.open(map,flag);
-  });		
-		
+	
+	var flag = new google.maps.Marker({
+		position: toronto,
+		map: map,
+        title: 'Tashi house'
+		});
+	
+	flag.addListener('click', function(){
+        infowindow.open(map, flag);
+		});
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 
 </body>
 </html>
