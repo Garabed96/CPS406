@@ -11,6 +11,41 @@
 
 <div id="map" style="width:1000px;height:500px;">Toronto Map will go here.</div> 
 
+<div > 
+	<table style="width:100%; margin-top: 50px; border: 1px solid black;" id="mainTable">
+		<thead>
+			<th></th>
+			<th>UF</th>
+			<th>TC</th>
+			<th>PH</th>
+			<th>FS</th>
+			<th>CPV</th>
+			<th>MSG</th>
+			<th>ES</th>
+			<th>GRBOS</th>
+			<th>i1</th>
+			<th>i2</th>			
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<button type="button" id="sendBtn" onClick="RoadProblems.sendItToMap()"/> Send 
+</div>
+
 <script>
 var getJSON = function(url)
 {
@@ -47,9 +82,57 @@ function markIt()
 	
 }
 
+function myArrayMap(list){
+	
+	var map = myMap();
+	var markers = [];
+	var infowindow = [];
+	var counter = 0;
+	list.forEach(function(data){
+	
+		if(!data.isOnMap){
+			var lat,lng;
+			url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+data.i1+'+and+'+data.i2+'+toronto'
+		
+			//Loads JSON-encoded data from the server using a GET HTTP request
+			getJSON(url).then(function(response)
+			{	
+				lat = response.results[0].geometry.location.lat;
+				lng = response.results[0].geometry.location.lng
+				
+				markers[counter] = new google.maps.Marker({
+					position: new google.maps.LatLng(lat, lng),
+					map: map,
+					title: data.i1
+				});
+				
+				infowindow[counter] = new google.maps.InfoWindow({
+					content: '<h1>' + data.i1 + '/' +data.i2+ '<h1>'
+				});
+				
+				markers[counter].addListener('click', function(){
+					infowindow[counter].open(map, markers[counter]);
+				});
+				counter++;
+			});
+		}
+	});
+}
+
 function myMap(lat, lng) 
 {	
-	if(lat && lng)
+	var toronto = new google.maps.LatLng(43.6115160, -79.5415350);
+
+	var mapOptions ={
+		center: toronto,
+		zoom: 11,
+		mapTypeId: google.maps.MapTypeId.ROADMAP	
+		}
+	
+	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	
+	return map;
+	/*if(lat && lng)
 	{
 		var toronto = new google.maps.LatLng(lat, lng);
 	}
@@ -76,7 +159,104 @@ function myMap(lat, lng)
 	flag.addListener('click', function(){
         infowindow.open(map, flag);
 		});
+		*/
 }
+
+var RoadProblems = {
+	
+	loadData: function(){
+		var mainList = [//
+			{
+				UF: true,TC : false,PH : true,FS: true,CPV: true,MSG: true,ES: true,GRBOS: true,i1: 'king',i2: 'jameson',isOnMap: true
+			},
+			{
+				UF: true,
+				TC : false,
+				PH : true,
+				FS: true,
+				CPV: true,
+				MSG: true,
+				ES: true,
+				GRBOS: true,
+				i1: 'lansdowne',
+				i2: 'queen',
+				isOnMap: false				
+			},
+			{
+				UF: true,
+				TC : false,
+				PH : true,
+				FS: true,
+				CPV: true,
+				MSG: true,
+				ES: true,
+				GRBOS: true,
+				i1: 'king',
+				i2: 'dufferin',
+				isOnMap: false				
+			}
+		];
+		
+		return mainList;
+	},
+	init : function(data) {// mainList: data from the guest table,  
+		this.loadTable(this.loadData())
+	},
+
+	loadTable : function(list){
+		var table = document.getElementById("mainTable")
+		var count = 1;
+		list.forEach(function(data){
+			if(!data.isOnMap){
+				var row = table.insertRow(count);
+				var checkBoxCell = row.insertCell(0)
+				
+				var element1 = document.createElement('input');
+				element1.type="radio";
+				checkBoxCell.appendChild(element1);
+				
+				var cell = RoadProblems.makeCell(row);			
+				cell.UF.innerHTML = data.UF;
+				cell.TC.innerHTML = data.TC;
+				cell.PH.innerHTML = data.PH
+				cell.FS.innerHTML = data.FS
+				cell.CPV.innerHTML = data.CPV
+				cell.MSG.innerHTML = data.MSG
+				cell.ES.innerHTML = data.ES
+				cell.GRBOS.innerHTML = data.GRBOS
+				cell.i1.innerHTML = data.i1
+				cell.i2.innerHTML = data.i2
+				
+				count++;
+			}
+		})
+	},
+	makeCell: function(row){
+		return {
+			UF: row.insertCell(1),
+			TC: row.insertCell(2),
+			PH: row.insertCell(3),
+			FS: row.insertCell(4),
+			CPV: row.insertCell(5),
+			MSG: row.insertCell(6),
+			ES: row.insertCell(7),
+			GRBOS: row.insertCell(8),
+			i1: row.insertCell(9),
+			i2: row.insertCell(10)
+		}
+	},
+	sendItToMap: function(){
+		if(this.loadData()){
+			myArrayMap(this.loadData())
+		}
+	}
+};
+
+//1. CP ajax call php and get data
+//2. var data = getDatat()
+//3. RoadProblems.init(data);
+RoadProblems.init();
+
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
